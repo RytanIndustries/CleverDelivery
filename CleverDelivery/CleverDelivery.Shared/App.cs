@@ -14,6 +14,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace CleverDelivery
 {
@@ -23,12 +24,13 @@ namespace CleverDelivery
         {
             // Deployed applications must be licensed at the Lite level or greater. 
             // See https://developers.arcgis.com/licensing for further details.
-
+            var licencekey = "runtimelite,1000,rud1325666093,none,D7MFA0PL404M003AD018";
+            ArcGISRuntimeEnvironment.SetLicense(licenseKey:licencekey);
             // Initialize the ArcGIS Runtime before any components are created.
             ArcGISRuntimeEnvironment.Initialize();
 
             // The root page of your application
-            MainPage = new MapPage();
+            MainPage = new NavigationPage(new MapPage());
         }
     }
 }

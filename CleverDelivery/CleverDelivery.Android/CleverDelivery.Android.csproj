@@ -81,4 +81,9 @@
   </ItemGroup>
   <Import Project="..\CleverDelivery.Shared\CleverDelivery.Shared.projitems" Label="Shared" Condition="Exists('..\CleverDelivery.Shared\CleverDelivery.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties TriggeredFromHotReload="False" />
+    </VisualStudio>
+  </ProjectExtensions>
 </Project>

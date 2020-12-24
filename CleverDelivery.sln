@@ -11,10 +11,21 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleverDelivery.Android", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleverDelivery.UWP", "CleverDelivery\CleverDelivery.UWP\CleverDelivery.UWP.csproj", "{80C9D340-E363-45DC-A5CA-962553719547}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Xamarin.Forms.Core", "CleverDelivery\Xamarin.Forms.Core\Xamarin.Forms.Core.shproj", "{9FBF1BE8-6CC0-4DC2-BC5B-AB11181D64E3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Xamarin.Forms.Core.Charting", "CleverDelivery\Xamarin.Forms.Core.Charting\Xamarin.Forms.Core.Charting.shproj", "{DD5605E7-9492-427B-8CD8-3F0622E39248}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Xamarin.Forms.CoreExcel", "CleverDelivery\Xamarin.Forms.CoreExcel\Xamarin.Forms.CoreExcel.shproj", "{8A0D1B1D-A18C-4DCA-A84C-8255E1501CF6}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		CleverDelivery\CleverDelivery.Shared\CleverDelivery.Shared.projitems*{0e616674-d158-4661-a8d4-af586fe50fa9}*SharedItemsImports = 4
 		CleverDelivery\CleverDelivery.Shared\CleverDelivery.Shared.projitems*{80c9d340-e363-45dc-a5ca-962553719547}*SharedItemsImports = 4
+		CleverDelivery\Xamarin.Forms.CoreExcel\Xamarin.Forms.CoreExcel.projitems*{8a0d1b1d-a18c-4dca-a84c-8255e1501cf6}*SharedItemsImports = 13
+		CleverDelivery\Xamarin.Forms.Core\Xamarin.Forms.Core.projitems*{9fbf1be8-6cc0-4dc2-bc5b-ab11181d64e3}*SharedItemsImports = 13
 		CleverDelivery\CleverDelivery.Shared\CleverDelivery.Shared.projitems*{d06510f9-a705-483d-8550-d55117c58eb7}*SharedItemsImports = 13
+		CleverDelivery\CleverDelivery.Shared\CleverDelivery.Shared.projitems*{d83a944c-2f7c-47f4-9e49-07837f74f693}*SharedItemsImports = 4
+		CleverDelivery\Xamarin.Forms.Core.Charting\Xamarin.Forms.Core.Charting.projitems*{dd5605e7-9492-427b-8cd8-3f0622e39248}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU

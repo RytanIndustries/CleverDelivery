@@ -26,7 +26,7 @@ namespace CleverDelivery.Shared
 
         }
 
-        private Map _map = new Map(Basemap.CreateStreetsVector());
+        private Map _map = new Map(Basemap.CreateNavigationVector());
 
         /// <summary>
         /// Gets or sets the map
