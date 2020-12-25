@@ -200,13 +200,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CoreContenView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CoreMasterDetailPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CorePage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CoreTabbedPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CoreTabbedPageRenderer.Droid.cs">
-      <DependentUpon>..\..\Pages\CoreTabbedPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CoreTabbedPageRenderer.IOS.cs">
-      <DependentUpon>..\..\Pages\CoreTabbedPage.cs</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CoreTelephonyPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\Pages\CoreTelephonyPageRenderer.Droid.cs">
       <DependentUpon>..\..\Pages\CoreTelephonyPage.cs</DependentUpon>

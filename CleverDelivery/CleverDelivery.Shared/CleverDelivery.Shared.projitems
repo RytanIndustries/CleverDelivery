@@ -22,4 +22,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Config\config.prod.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Config\config.qa.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Config\config.dev.json" />
+  </ItemGroup>
 </Project>

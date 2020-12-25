@@ -13,13 +13,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms.Core;
 
 namespace CleverDelivery.Shared
 {
     /// <summary>
     /// Provides map data to an application
     /// </summary>
-    public class MapViewModel : INotifyPropertyChanged
+    public class MapViewModel : CoreViewModel
     {
         public MapViewModel()
         {
@@ -34,20 +35,14 @@ namespace CleverDelivery.Shared
         public Map Map
         {
             get { return _map; }
-            set { _map = value; OnPropertyChanged(); }
+            set { _map = value;}
         }
 
-        /// <summary>
-        /// Raises the <see cref="MapViewModel.PropertyChanged" /> event
-        /// </summary>
-        /// <param name="propertyName">The name of the property that has changed</param>
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        
+        public override void OnViewMessageReceived(string key, object obj)
         {
-            var propertyChangedHandler = PropertyChanged;
-            if (propertyChangedHandler != null)
-                propertyChangedHandler(this, new PropertyChangedEventArgs(propertyName));
+            throw new NotImplementedException();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

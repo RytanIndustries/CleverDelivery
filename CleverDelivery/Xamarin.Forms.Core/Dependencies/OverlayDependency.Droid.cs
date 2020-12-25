@@ -56,7 +56,7 @@ namespace Xamarin.Forms.Core
             var prg = new Widget.ProgressBar(Ctx);
             prg.Indeterminate = true;
 
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Q)
+            if (Build.VERSION.SdkInt > BuildVersionCodes.Q)
             {
                 prg.IndeterminateDrawable.SetColorFilter(new BlendModeColorFilter(Graphics.Color.White, BlendMode.Multiply));
             }

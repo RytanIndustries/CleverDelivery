@@ -32,19 +32,11 @@ namespace Xamarin.Forms.Core
             get
             {
 
-#if __ANDROID__
-
-                var ctx = App.Application.Context;
-                var height = (int) (ctx.Resources.DisplayMetrics.HeightPixels / ctx.Resources.DisplayMetrics.Density);
-                var width = (int) (ctx.Resources.DisplayMetrics.WidthPixels / ctx.Resources.DisplayMetrics.Density);
+                // Get Metrics
+                var mainDisplayInfo = DeviceDisplay.MainDisplayInfo;
+                var height = (int)mainDisplayInfo.Height;
+                var width = (int)mainDisplayInfo.Width;
                 return new Size(width, height);
-#endif
-#if __IOS__
-                var height = (int)UIScreen.MainScreen.Bounds.Height;
-                var width = (int)UIScreen.MainScreen.Bounds.Width;
-                return new Size(width, height);
-#endif
-
             }
         }
 
@@ -201,6 +193,27 @@ namespace Xamarin.Forms.Core
         }
 
 #endif
+#if WINDOWS_UWP
+    public static string DeviceToken
+        {
+            get
+            {
+                var tokenString = Preferences.Get("DeviceToken", null);
+                if (!string.IsNullOrEmpty(tokenString))
+                {
+                    var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(tokenString);
+                    return System.Convert.ToBase64String(plainTextBytes);
+                }
+                return null;
+            }
+            set
+            {
+                var tokenStringBase64 = System.Convert.FromBase64String(value);
+                Preferences.Set("DeviceToken", System.Text.Encoding.UTF8.GetString(tokenStringBase64));
+            }
+        }
+#endif
+
 
         internal class AppData
         {
