@@ -34,7 +34,11 @@
 	<string>LaunchScreen.storyboard</string>
 	<key>CFBundleShortVersionString</key>
 	<string></string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>We utilize GPS current location to assist and routing optimization. It also may be used for Navigation of routes in the future</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 </dict>
 </plist>

@@ -10,14 +10,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapPage.xaml.cs">
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\AddressSearchPage.xaml.cs">
+      <DependentUpon>AddressSearchPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MapViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MapPage.xaml.cs">
       <DependentUpon>MapPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SearchViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)MapPage.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\MapPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -26,5 +31,15 @@
     <Content Include="$(MSBuildThisFileDirectory)Config\config.prod.json" />
     <Content Include="$(MSBuildThisFileDirectory)Config\config.qa.json" />
     <Content Include="$(MSBuildThisFileDirectory)Config\config.dev.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Images\pin_star_blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)ContentViews\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\AddressSearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

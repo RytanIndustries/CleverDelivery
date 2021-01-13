@@ -16,13 +16,15 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Xamarin.Forms;
+using Frame = Windows.UI.Xaml.Controls.Frame;
 
 namespace CleverDelivery.UWP
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    sealed partial class App : Application
+    sealed partial class App : Windows.UI.Xaml.Application
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -47,8 +49,7 @@ namespace CleverDelivery.UWP
                     this.DebugSettings.EnableFrameRateCounter = true;
                 }
 #endif
-            Frame rootFrame = Window.Current.Content as Frame;
-
+            Windows.UI.Xaml.Controls.Frame rootFrame = Window.Current.Content as Windows.UI.Xaml.Controls.Frame;
             Xamarin.Forms.Forms.Init(e, new Assembly[] { typeof(MapView).GetTypeInfo().Assembly });
 
             // Do not repeat app initialization when the Window already has content,

@@ -1,4 +1,5 @@
-﻿using Esri.ArcGISRuntime;
+﻿using CleverDelivery.Pages;
+using Esri.ArcGISRuntime;
 using Esri.ArcGISRuntime.Data;
 using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Location;
@@ -22,15 +23,16 @@ namespace CleverDelivery
     {
         public App()
         {
+            Device.SetFlags(new string[] { "Markup_Experimental" });
             // Deployed applications must be licensed at the Lite level or greater. 
             // See https://developers.arcgis.com/licensing for further details.
-            var licencekey = "runtimelite,1000,rud1325666093,none,D7MFA0PL404M003AD018";
+            
             ArcGISRuntimeEnvironment.SetLicense(licenseKey:licencekey);
             // Initialize the ArcGIS Runtime before any components are created.
             ArcGISRuntimeEnvironment.Initialize();
-
+            
             // The root page of your application
-            MainPage = new NavigationPage(new MapPage());
+            MainPage = new NavigationPage(new AddressSearchPage());
         }
     }
 }
