@@ -192,8 +192,8 @@ namespace CleverDelivery.ViewModels
                 MapView.LocationDisplay.IsEnabled = true;
                 MapView.LocationDisplay.InitialZoomScale = 60000;
 #else
-                await MyMapView.LocationDisplay.DataSource.StartAsync();
-                MyMapView.LocationDisplay.IsEnabled = true;
+                await MapView.LocationDisplay.DataSource.StartAsync();
+                MapView.LocationDisplay.IsEnabled = true;
 #endif
             }
             catch (Exception ex)

@@ -28,7 +28,7 @@ namespace CleverDelivery.Pages
         private GraphicsOverlay _routeGraphicsOverlay;
 
         // URI for the San Diego route service
-        private Uri _sanDiegoRouteServiceUri = new Uri("https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer");
+        private Uri _sanDiegoRouteServiceUri = new Uri("https://route.arcgis.com/arcgis/rest/services/World/Route/NAServer/Route_World");
 
         // URIs for picture marker images
         private Uri _checkedFlagIconUri = new Uri("https://static.arcgis.com/images/Symbols/Transportation/CheckeredFlag.png");
@@ -45,21 +45,21 @@ namespace CleverDelivery.Pages
         {
 
             // Define the route stop locations (points)
-            MapPoint fromPoint = new MapPoint(-117.15494348793044, 32.706506537686927, SpatialReferences.Wgs84);
-            MapPoint toPoint = new MapPoint(-117.14905088669816, 32.735308180609138, SpatialReferences.Wgs84);
-
-            //// Create Stop objects with the points and add them to a list of stops
-            //Stop stop1 = new Stop(new MapPoint(33.638390, -112.068962, SpatialReferences.Wgs84));
-            //Stop stop2 = new Stop(new MapPoint(-111.994930, 33.618900, SpatialReferences.Wgs84));
-            //Stop stop3 = new Stop(new MapPoint(-112.0021089, 33.6858299, SpatialReferences.Wgs84));
-            //Stop stop4 = new Stop(new MapPoint(-111.9734644, 33.6348065, SpatialReferences.Wgs84));
-            //Stop stop5 = new Stop(new MapPoint(-112.1028099, 33.7334937, SpatialReferences.Wgs84));
-            //_routeStops = new List<Stop> { stop1, stop2, stop3, stop4, stop5 };
+            MapPoint fromPoint = new MapPoint(-112.068962, 33.638390, SpatialReferences.Wgs84);
+            MapPoint toPoint = new MapPoint(-112.1028099, 33.7334937, SpatialReferences.Wgs84);
 
             // Create Stop objects with the points and add them to a list of stops
-            Stop stop1 = new Stop(fromPoint);
-            Stop stop2 = new Stop(toPoint);
-            _routeStops = new List<Stop> { stop1, stop2 };
+            Stop stop1 = new Stop(new MapPoint(-112.068962, 33.638390,  SpatialReferences.Wgs84));
+            Stop stop2 = new Stop(new MapPoint(-111.994930, 33.618900, SpatialReferences.Wgs84));
+            Stop stop3 = new Stop(new MapPoint(-112.0021089, 33.6858299, SpatialReferences.Wgs84));
+            Stop stop4 = new Stop(new MapPoint(-111.9734644, 33.6348065, SpatialReferences.Wgs84));
+            Stop stop5 = new Stop(new MapPoint(-112.1028099, 33.7334937, SpatialReferences.Wgs84));
+            _routeStops = new List<Stop> { stop1, stop2, stop3, stop4, stop5 };
+
+            //// Create Stop objects with the points and add them to a list of stops
+            //Stop stop1 = new Stop(fromPoint);
+            //Stop stop2 = new Stop(toPoint);
+            //_routeStops = new List<Stop> { stop1, stop2 };
 
             // Picture marker symbols: from = car, to = checkered flag
             PictureMarkerSymbol carSymbol = new PictureMarkerSymbol(_carIconUri);
@@ -96,7 +96,7 @@ namespace CleverDelivery.Pages
             MyMapView.SpatialReferenceChanged += (s, e) => MyMapView.SetViewpoint(sanDiegoViewpoint);
 
             // Add a new Map and the graphics overlay to the map view
-            MyMapView.Map = new Map(Basemap.CreateStreets());
+            MyMapView.Map = new Map(Basemap.CreateImageryWithLabelsVector());
             MyMapView.GraphicsOverlays.Add(_routeGraphicsOverlay);
         }
 
