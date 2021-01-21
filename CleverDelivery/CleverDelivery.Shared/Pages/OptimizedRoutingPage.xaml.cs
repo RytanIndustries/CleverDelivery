@@ -122,10 +122,16 @@ namespace CleverDelivery.Pages
 
                 // Get the default parameters from the route task (defined with the service)
                 RouteParameters routeParams = await solveRouteTask.CreateDefaultParametersAsync();
+                routeParams.PreserveLastStop = false;
+                routeParams.DirectionsStyle = DirectionsStyle.Navigation;
 
+                //TravelMode travel = new TravelMode();
+                var travelModes = solveRouteTask.RouteTaskInfo.TravelModes.ToList();
                 // Make some changes to the default parameters
                 routeParams.ReturnStops = true;
                 routeParams.ReturnDirections = true;
+                routeParams.FindBestSequence = true;
+                routeParams.DirectionsDistanceUnits = Esri.ArcGISRuntime.UnitSystem.Imperial;
 
                 // Set the list of route stops that were defined at startup
                 routeParams.SetStops(_routeStops);
@@ -134,7 +140,8 @@ namespace CleverDelivery.Pages
                 RouteResult solveRouteResult = await solveRouteTask.SolveRouteAsync(routeParams);
 
                 // Get the first (should be only) route from the result
-                Route firstRoute = solveRouteResult.Routes.First();
+                var min = solveRouteResult.Routes.Min(x => x.TotalLength);
+                Route firstRoute = solveRouteResult.Routes.FirstOrDefault(x=>x.TotalLength == min);
 
                 // Get the route geometry (polyline)
                 Polyline routePolyline = firstRoute.RouteGeometry;
