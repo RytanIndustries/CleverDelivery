@@ -27,12 +27,13 @@ namespace CleverDelivery
             // Deployed applications must be licensed at the Lite level or greater. 
             // See https://developers.arcgis.com/licensing for further details.
             
-            ArcGISRuntimeEnvironment.SetLicense(licenseKey:licencekey);
+            //ArcGISRuntimeEnvironment.SetLicense(licenseKey:licencekey);
+
             // Initialize the ArcGIS Runtime before any components are created.
             ArcGISRuntimeEnvironment.Initialize();
             
             // The root page of your application
-            MainPage = new NavigationPage(new AddressSearchPage());
+            MainPage = new NavigationPage(new StartPage());
         }
     }
 }

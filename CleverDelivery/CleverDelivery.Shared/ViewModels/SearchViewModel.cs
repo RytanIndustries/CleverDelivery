@@ -1,4 +1,5 @@
-﻿using Esri.ArcGISRuntime.Geometry;
+﻿using CleverDelivery.Pages;
+using Esri.ArcGISRuntime.Geometry;
 using Esri.ArcGISRuntime.Mapping;
 using Esri.ArcGISRuntime.Symbology;
 using Esri.ArcGISRuntime.Tasks.Geocoding;
@@ -7,6 +8,7 @@ using Esri.ArcGISRuntime.Xamarin.Forms;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -25,13 +27,14 @@ namespace CleverDelivery.ViewModels
         #region Commands
 
         public ICommand AddressSearchCommand { get; set; }
+        public ICommand StartGeolocation { get; set; }
 
         #endregion Commands
 
         #region Properties
 
         // Store a reference to the map view (to set the view extent and add graphics)
-        public MapView MapView;
+        public MapView MapView { get; set; }
         public string SearchTerm { get; set; }
         // The LocatorTask provides geocoding services
         private LocatorTask _geocoder;
@@ -46,18 +49,31 @@ namespace CleverDelivery.ViewModels
             get { return _map; }
             set { _map = value; }
         }
-
+        // String array to store the different device location options.
+        private string[] _navigationTypes =
+        {
+            "On",
+            "Re-Center",
+            "Navigation",
+            "Compass"
+        };
         #endregion Properties
 
         public SearchViewModel()
         {
             
-            _map.InitialViewpoint = new Viewpoint(34.05293, -118.24368, 600000);
+            _map.InitialViewpoint = new Viewpoint(34.05293, -118.24368, 6000);
             AddressSearchCommand = new CoreCommand(async (obj)=> 
             {
                 // Initialize the LocatorTask with the provided service Uri
                 _geocoder = await LocatorTask.CreateAsync(_serviceUri);
                 await UpdateSearch();
+            });
+            StartGeolocation = new CoreCommand(async (obj) =>
+            {
+                // Initialize the LocatorTask with the provided service Uri
+                _geocoder = await LocatorTask.CreateAsync(_serviceUri);
+                await UpdateCurrentLocation();
             });
         }
         public override void OnViewMessageReceived(string key, object obj)
@@ -75,6 +91,10 @@ namespace CleverDelivery.ViewModels
             var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
             var cts = new CancellationTokenSource();
             var location = await Geolocation.GetLocationAsync(request, cts.Token);
+            _map.InitialViewpoint = new Viewpoint(location.Latitude, location.Longitude, 6000);
+            MapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
+            await MapView.LocationDisplay.DataSource.StartAsync();
+            MapView.LocationDisplay.IsEnabled = true;
         }
 
         public async Task UpdateSearch()
@@ -146,6 +166,41 @@ namespace CleverDelivery.ViewModels
             pinSymbol.LeaderOffsetX = 30;
             pinSymbol.OffsetY = 14;
             return new Graphic(point, pinSymbol);
+        }
+
+        private async Task UpdateCurrentLocation()
+        {
+            MapView.LocationDisplay.AutoPanMode = LocationDisplayAutoPanMode.Navigation;
+            await MapView.LocationDisplay.DataSource.StartAsync();
+            MapView.LocationDisplay.IsEnabled = true;
+            
+
+            try
+            {
+                // Permission request only needed on Android.
+#if XAMARIN_ANDROID
+                var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+                if (status != PermissionStatus.Granted)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Permission Requested", "We need to use your location service in order to show your current location on a map", "OKAY");
+                    var wasGranted = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+                    if (wasGranted != PermissionStatus.Granted)
+                        Application.Current.MainPage = new NavigationPage(new StartPage());
+                }
+
+                await MapView.LocationDisplay.DataSource.StartAsync();
+                MapView.LocationDisplay.IsEnabled = true;
+                MapView.LocationDisplay.InitialZoomScale = 60000;
+#else
+                await MyMapView.LocationDisplay.DataSource.StartAsync();
+                MyMapView.LocationDisplay.IsEnabled = true;
+#endif
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+                await Application.Current.MainPage.DisplayAlert("Couldn't start location", ex.Message, "OK");
+            }
         }
     }
 }

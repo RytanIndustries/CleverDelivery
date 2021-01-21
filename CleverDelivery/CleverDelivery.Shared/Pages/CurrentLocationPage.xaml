@@ -6,18 +6,20 @@
 			 xmlns:local="clr-namespace:CleverDelivery.Shared;assembly=CleverDelivery"
              xmlns:core="clr-namespace:Xamarin.Forms.Core;assembly=CleverDelivery"
              ViewModel="CleverDelivery.ViewModels.SearchViewModel"
-            x:Class="CleverDelivery.Pages.AddressSearchPage">
+             x:Class="CleverDelivery.Pages.CurrentLocationPage">
     <core:CorePage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <SearchBar Grid.Row="0" x:Name="MySearchBar" Placeholder="Find address" IsEnabled="false" Text="{Binding SearchTerm}" />
-            <Button Text="Suggest" x:Name="MySuggestButton" Command="{Binding AddressSearchCommand}" IsEnabled="false" Grid.Row="1" />
-            <esriUI:MapView x:Name="MyMapView" Grid.Row="2" />
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Clicked="OnStopClicked" Text="Stop" Grid.Row="0" Grid.Column="0" x:Name="StopButton" />
+            <Button Command="{Binding  StartGeolocation}" Text="Start" Grid.Row="0" Grid.Column="1" x:Name="StartButton" />
+            <esriUI:MapView x:Name="MyMapView" Grid.Row="1" Grid.ColumnSpan="2"/>
         </Grid>
-
     </core:CorePage.Content>
 </core:CorePage>

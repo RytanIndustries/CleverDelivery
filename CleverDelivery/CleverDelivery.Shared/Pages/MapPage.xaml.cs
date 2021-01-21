@@ -4,7 +4,7 @@ using Xamarin.Forms.Core;
 
 namespace CleverDelivery
 {
-    public partial class MapPage : CorePage
+    public partial class MapPage:ContentPage
     {
         public MapPage()
         {

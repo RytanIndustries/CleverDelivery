@@ -16,8 +16,13 @@ namespace Xamarin.Forms.Core
         {
 #if NETSTANDARD1_1
             return null;
+
+#elif WINDOWS_UWP
+            return null;
 #else
             return new LatestVersionImplementation();
+
+
 #endif
         }
 

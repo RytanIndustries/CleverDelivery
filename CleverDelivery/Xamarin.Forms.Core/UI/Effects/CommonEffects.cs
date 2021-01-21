@@ -3,12 +3,12 @@
 [assembly: ResolutionGroupName("CoreEffects")]
 namespace Xamarin.Forms.Core
 {
-
+#if !WINDOWS_UWP
     public class RemoveEmptyRowsEffect : RoutingEffect
     {
         public RemoveEmptyRowsEffect() : base($"CoreEffects.{typeof(ListRemoveEmptyRows).Name}") { }
     }
-
+#endif
 #if __IOS__
 
 	public class DisableWebViewScrollEffect : RoutingEffect
@@ -17,7 +17,7 @@ namespace Xamarin.Forms.Core
 	}
 
 #endif
-
+#if !WINDOWS_UWP
     public class HideListSeparatorEffect : RoutingEffect
 	{
 		public HideListSeparatorEffect() : base($"CoreEffects.{typeof(HideTableSeparator).Name}") { }
@@ -26,6 +26,6 @@ namespace Xamarin.Forms.Core
     {
         public UnderlineColorEffect() : base($"CoreEffects.{typeof(UnderlineColor).Name}") { }
     }
-
+#endif
 
 }

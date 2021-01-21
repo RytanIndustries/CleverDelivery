@@ -20,14 +20,14 @@ namespace CleverDelivery.Shared
     /// <summary>
     /// Provides map data to an application
     /// </summary>
-    public class MapViewModel : CoreViewModel
+    public class MapViewModel : INotifyPropertyChanged
     {
         public MapViewModel()
         {
 
         }
 
-        private Map _map = new Map(Basemap.CreateNavigationVector());
+        private Map _map = new Map(Basemap.CreateStreetsVector());
 
         /// <summary>
         /// Gets or sets the map
@@ -35,14 +35,20 @@ namespace CleverDelivery.Shared
         public Map Map
         {
             get { return _map; }
-            set { _map = value;}
+            set { _map = value; OnPropertyChanged(); }
         }
 
-        
-        public override void OnViewMessageReceived(string key, object obj)
+        /// <summary>
+        /// Raises the <see cref="MapViewModel.PropertyChanged" /> event
+        /// </summary>
+        /// <param name="propertyName">The name of the property that has changed</param>
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            throw new NotImplementedException();
+            var propertyChangedHandler = PropertyChanged;
+            if (propertyChangedHandler != null)
+                propertyChangedHandler(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
